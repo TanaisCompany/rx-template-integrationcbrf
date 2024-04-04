@@ -1,0 +1,234 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "42611041-a95a-46d9-8873-243969930d11",
+  "Name": "IntCBRF",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "tanais.IntCBRF.Client",
+  "ClientBaseAssemblyName": "tanais.IntCBRF.ClientBase",
+  "ClientBaseNamespace": "tanais.IntCBRF.ClientBase",
+  "ClientNamespace": "tanais.IntCBRF.Client",
+  "Code": "IntCBRF",
+  "CompanyCode": "tanais",
+  "Cover": {
+    "NameGuid": "a2bd747c-b741-436d-96ca-7b5bf4032ce4",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "4f89dba1-85a8-4349-bb30-9e6d7417a6f6",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "b73d6be3-fdc3-4390-9922-269295d903b0",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": []
+  },
+  "Dependencies": [
+    {
+      "Id": "fe87ec77-1602-4e61-a58f-256405716c12",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    },
+    {
+      "Id": "92491aa6-c4df-4f46-a807-ebdd337bda74",
+      "MaxVersion": "",
+      "MinVersion": "1.1.0.0"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "tanais.IntCBRF",
+  "IsVisible": false,
+  "Jobs": [
+    {
+      "NameGuid": "8c92d510-9854-46a6-9e23-580c7df56984",
+      "Name": "IntCBRSyncCurrencies",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T05:00:00"
+    },
+    {
+      "NameGuid": "72f41330-293f-498d-a685-37e0101625b5",
+      "Name": "IntCBRSyncBanks",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    }
+  ],
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicConstants": [
+    {
+      "Name": "AddressCBRBanks",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"http://cbr.ru/scripts/XML_bic.asp\""
+    },
+    {
+      "Name": "AddressCBRCurrencies",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"https://www.cbr.ru/scripts/XML_valFull.asp\""
+    },
+    {
+      "Name": "CaseBanks",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Banks\""
+    },
+    {
+      "Name": "CaseCurrencies",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Currencies\""
+    },
+    {
+      "Name": "Created",
+      "ParentClasses": [
+        "Module",
+        "ProcessResult"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "1"
+    },
+    {
+      "Name": "EncodingStandart",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Windows-1251\""
+    },
+    {
+      "Name": "Error",
+      "ParentClasses": [
+        "Module",
+        "EventResult"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Error\""
+    },
+    {
+      "Name": "Error",
+      "ParentClasses": [
+        "Module",
+        "ProcessResult"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "2"
+    },
+    {
+      "Name": "IntegrationResponsible",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"17EFC61A-6CEF-4D4A-AF15-53C32A7ED334\")"
+    },
+    {
+      "Name": "NotChanged",
+      "ParentClasses": [
+        "Module",
+        "ProcessResult"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "3"
+    },
+    {
+      "Name": "Success",
+      "ParentClasses": [
+        "Module",
+        "EventResult"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Success\""
+    },
+    {
+      "Name": "SystemCode",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"CBRF\""
+    },
+    {
+      "Name": "Updated",
+      "ParentClasses": [
+        "Module",
+        "ProcessResult"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "0"
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "CBRSynchronizationBanks",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "CBRSynchronizationCurrencies",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SendNotice",
+      "Parameters": [
+        {
+          "Name": "message",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "tanais.IntCBRF",
+  "ResourcesKeys": [
+    "PrefixCurrencies",
+    "PrefixBanks",
+    "ExecuteConnectError",
+    "CaseCurrencies",
+    "CaseBanks",
+    "IntegrationResponsible",
+    "SubjectNotice",
+    "ProcessImportCount",
+    "BlockedEntity"
+  ],
+  "ServerAssemblyName": "tanais.IntCBRF.Server",
+  "ServerNamespace": "tanais.IntCBRF.Server",
+  "SharedAssemblyName": "tanais.IntCBRF.Shared",
+  "SharedNamespace": "tanais.IntCBRF.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.8",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}
