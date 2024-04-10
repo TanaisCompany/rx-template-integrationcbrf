@@ -4,7 +4,7 @@ using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
 
-namespace Tanais.IntCBR.Structures.Module
+namespace Tanais.IntCBRF.Structures.CBRFSettings
 {
 
 }

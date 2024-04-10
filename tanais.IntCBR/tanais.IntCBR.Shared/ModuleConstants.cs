@@ -1,7 +1,7 @@
 using System;
 using Sungero.Core;
 
-namespace tanais.IntCBR.Constants
+namespace Tanais.IntCBR.Constants
 {
   public static class Module
   {

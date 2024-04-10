@@ -77,7 +77,7 @@
     <value>CBRF. Integration responsible</value>
   </data>
   <data name="SubjectNotice" xml:space="preserve">
-    <value>An error occurred during integration with the CB RF system</value>
+    <value>Result of integration with the CB RF system</value>
   </data>
   <data name="ProcessImportCount" xml:space="preserve">
     <value>Total {0} records 

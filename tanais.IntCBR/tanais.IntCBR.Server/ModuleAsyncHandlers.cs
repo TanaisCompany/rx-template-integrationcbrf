@@ -4,7 +4,7 @@ using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
 
-namespace tanais.IntCBR.Server
+namespace Tanais.IntCBR.Server
 {
   public class ModuleAsyncHandlers
   {

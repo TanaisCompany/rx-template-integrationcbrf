@@ -7,7 +7,7 @@ using System.Net;
 using System.Xml.Linq;
 using System.IO;
 using System.Text;
-namespace tanais.IntCBRF.Server
+namespace Tanais.IntCBRF.Server
 {
   public class ModuleJobs
   {

@@ -62,7 +62,7 @@
     <value>Integration with CB RF</value>
   </data>
   <data name="CoverTitle" xml:space="preserve">
-    <value>IntCBRF</value>
+    <value>Integration with CB RF</value>
   </data>
   <data name="JobDisplayName_8c92d510985446a69e23580c7df56984" xml:space="preserve">
     <value>Integration with the Central Bank of the Russian Federation. Synchronization of currencies</value>
@@ -75,5 +75,17 @@
   </data>
   <data name="JobDescription_72f41330293f498da68537e0101625b5" xml:space="preserve">
     <value>Synchronization of banks</value>
+  </data>
+  <data name="CoverTab_Tab" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="CoverGroup_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="CoverAction_CBRFSettings" xml:space="preserve">
+    <value>Module settings</value>
+  </data>
+  <data name="CoverDescription_CBRFSettings" xml:space="preserve">
+    <value />
   </data>
 </root>

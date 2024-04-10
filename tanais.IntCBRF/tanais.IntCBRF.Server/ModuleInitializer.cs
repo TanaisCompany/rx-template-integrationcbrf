@@ -5,14 +5,20 @@ using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Domain.Initialization;
 
-namespace tanais.IntCBRF.Server
+namespace Tanais.IntCBRF.Server
 {
   public partial class ModuleInitializer
   {
 
+    public override bool IsModuleVisible()
+    {
+      return Users.Current.IncludedIn(Roles.Administrators);
+    }
+
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {
       CreateRoles();
+      FillSettingRecord();
     }
     
     /// <summary>
@@ -23,7 +29,23 @@ namespace tanais.IntCBRF.Server
       InitializationLogger.Debug("Init: CBRF. Create roles.");
       
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(
-        tanais.IntCBRF.Resources.IntegrationResponsible, tanais.IntCBRF.Resources.IntegrationResponsible, tanais.IntCBRF.PublicConstants.Module.IntegrationResponsible);
+        Tanais.IntCBRF.Resources.IntegrationResponsible, Tanais.IntCBRF.Resources.IntegrationResponsible, Tanais.IntCBRF.PublicConstants.Module.IntegrationResponsible);
+    }
+    
+    /// <summary>
+    /// Заполнить записи настроечного справочника.
+    /// </summary>
+    public virtual void FillSettingRecord()
+    {
+      var settings = IntCBRF.CBRFSettingses.GetAll();
+      if (!settings.Any())
+      {
+        var newRecord = IntCBRF.CBRFSettingses.Create();
+        newRecord.AddressCBRBanks = Constants.Module.AddressCBRBanks;
+        newRecord.AddressCBRCurrencies = Constants.Module.AddressCBRCurrencies;
+        newRecord.SendNotice = IntCBRF.CBRFSettings.SendNotice.Errors;
+        newRecord.Save();
+      }
     }
   }
 

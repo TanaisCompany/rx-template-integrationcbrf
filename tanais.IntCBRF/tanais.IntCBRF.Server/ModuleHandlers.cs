@@ -4,7 +4,7 @@ using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
 
-namespace tanais.IntCBRF.Server
+namespace Tanais.IntCBRF.Server
 {
   partial class IntCBRFHandlers
   {

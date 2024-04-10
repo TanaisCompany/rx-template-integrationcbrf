@@ -3,26 +3,46 @@
   "NameGuid": "42611041-a95a-46d9-8873-243969930d11",
   "Name": "IntCBRF",
   "AsyncHandlers": [],
-  "ClientAssemblyName": "tanais.IntCBRF.Client",
-  "ClientBaseAssemblyName": "tanais.IntCBRF.ClientBase",
-  "ClientBaseNamespace": "tanais.IntCBRF.ClientBase",
-  "ClientNamespace": "tanais.IntCBRF.Client",
+  "ClientAssemblyName": "Tanais.IntCBRF.Client",
+  "ClientBaseAssemblyName": "Tanais.IntCBRF.ClientBase",
+  "ClientBaseNamespace": "Tanais.IntCBRF.ClientBase",
+  "ClientNamespace": "Tanais.IntCBRF.Client",
   "Code": "IntCBRF",
-  "CompanyCode": "tanais",
+  "CompanyCode": "Tanais",
   "Cover": {
     "NameGuid": "a2bd747c-b741-436d-96ca-7b5bf4032ce4",
-    "Actions": [],
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "edc447e5-bd68-4628-8370-3f52deb5951f",
+        "Name": "CBRFSettings",
+        "FunctionName": "ShowSettings",
+        "GroupId": "34cb82f8-68f9-4cba-9cd7-ae13a23d2398"
+      }
+    ],
     "Background": null,
     "Footer": {
       "NameGuid": "4f89dba1-85a8-4349-bb30-9e6d7417a6f6",
       "BackgroundPosition": "Stretch"
     },
-    "Groups": [],
+    "Groups": [
+      {
+        "NameGuid": "34cb82f8-68f9-4cba-9cd7-ae13a23d2398",
+        "Name": "Settings",
+        "BackgroundPosition": "Stretch",
+        "TabId": "83fa2689-e2d9-4e65-bca3-ae073661d39a"
+      }
+    ],
     "Header": {
       "NameGuid": "b73d6be3-fdc3-4390-9922-269295d903b0",
       "BackgroundPosition": "Stretch"
     },
-    "Tabs": []
+    "Tabs": [
+      {
+        "NameGuid": "83fa2689-e2d9-4e65-bca3-ae073661d39a",
+        "Name": "Tab"
+      }
+    ]
   },
   "Dependencies": [
     {
@@ -37,14 +57,19 @@
       "MinVersion": "1.1.0.0"
     }
   ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "589fd71d-3a04-4def-a58b-51a526779903"
+    }
+  ],
   "HandledEvents": [
-    "InitializingServer"
+    "InitializingServer",
+    "VisibilityServer"
   ],
   "IconResourcesKeys": [],
   "Importance": "Medium",
   "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
-  "InterfaceNamespace": "tanais.IntCBRF",
-  "IsVisible": false,
+  "InterfaceNamespace": "Tanais.IntCBRF",
   "Jobs": [
     {
       "NameGuid": "8c92d510-9854-46a6-9e23-580c7df56984",
@@ -59,6 +84,13 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
+    }
+  ],
+  "Libraries": [
+    {
+      "NameGuid": "362089bb-63bf-42d2-9b56-b643ea1936e3",
+      "Name": "Json",
+      "Scope": "Both"
     }
   ],
   "Overridden": [
@@ -202,7 +234,7 @@
   ],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
-  "ResourceInterfaceNamespace": "tanais.IntCBRF",
+  "ResourceInterfaceNamespace": "Tanais.IntCBRF",
   "ResourcesKeys": [
     "PrefixCurrencies",
     "PrefixBanks",
@@ -214,10 +246,10 @@
     "ProcessImportCount",
     "BlockedEntity"
   ],
-  "ServerAssemblyName": "tanais.IntCBRF.Server",
-  "ServerNamespace": "tanais.IntCBRF.Server",
-  "SharedAssemblyName": "tanais.IntCBRF.Shared",
-  "SharedNamespace": "tanais.IntCBRF.Shared",
+  "ServerAssemblyName": "Tanais.IntCBRF.Server",
+  "ServerNamespace": "Tanais.IntCBRF.Server",
+  "SharedAssemblyName": "Tanais.IntCBRF.Shared",
+  "SharedNamespace": "Tanais.IntCBRF.Shared",
   "SpecialFolders": [],
   "Version": "0.0.1.8",
   "Widgets": [],

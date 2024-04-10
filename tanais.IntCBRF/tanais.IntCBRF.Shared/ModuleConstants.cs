@@ -1,7 +1,7 @@
 ﻿using System;
 using Sungero.Core;
 
-namespace tanais.IntCBRF.Constants
+namespace Tanais.IntCBRF.Constants
 {
   public static class Module
   {

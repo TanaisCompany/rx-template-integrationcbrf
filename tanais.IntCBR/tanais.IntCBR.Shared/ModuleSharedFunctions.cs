@@ -4,7 +4,7 @@ using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
 
-namespace tanais.IntCBR.Shared
+namespace Tanais.IntCBR.Shared
 {
   public class ModuleFunctions
   {

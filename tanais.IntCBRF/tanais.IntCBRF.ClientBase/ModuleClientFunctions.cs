@@ -6,10 +6,18 @@ using Sungero.CoreEntities;
 using System.IO;
 using System.Text;
 
-namespace tanais.IntCBRF.Client
+namespace Tanais.IntCBRF.Client
 {
   public class ModuleFunctions
   { 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void ShowSettings()
+    {
+      CBRFSettingses.GetAll().First().Show();
+    }
 
   }
 }

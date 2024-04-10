@@ -5,6 +5,6 @@ using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Workflow;
 
-namespace tanais.IntCBRF.Server.IntCBRFBlocks
+namespace Tanais.IntCBRF.Server.IntCBRFBlocks
 {
 }

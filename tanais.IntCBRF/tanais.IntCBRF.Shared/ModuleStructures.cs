@@ -4,8 +4,29 @@ using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
 
-namespace tanais.IntCBRF.Structures.Module
+namespace Tanais.IntCBRF.Structures.Module
 {
+
+  /// <summary>
+  /// Структура для лога.
+  /// </summary>
+  partial class Log
+  {    
+    /// <summary>
+    /// Код системыы.
+    /// </summary>
+    public string SystemCode { get; set; }
+    
+    /// <summary>
+    /// Результат.
+    /// </summary>
+    public string EventResult { get; set; }
+    
+    /// <summary>
+    /// сообщение
+    /// </summary>
+    public string EventMessage { get; set; }
+  }
 
   /// <summary>
   /// Счетчик результатов обработки.
@@ -36,27 +57,6 @@ namespace tanais.IntCBRF.Structures.Module
     /// Общее кол-во.
     /// </summary>
     public int Total { get; set; }
-  }
-
-  /// <summary>
-  /// Настройки синхронизации ЦБ РФ.
-  /// </summary>
-  partial class Settings
-  {
-    /// <summary>
-    /// Ссылка для получения данных.
-    /// </summary>
-    public string Address { get; set; }
-    
-    /// <summary>
-    /// Префикс логирования.
-    /// </summary>
-    public string CaseLog { get; set; }
-    
-    /// <summary>
-    /// Стандарт кодировки XML.
-    /// </summary>
-    public string EncodingStandart { get; set; }
   }
 
 }

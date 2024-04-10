@@ -85,7 +85,7 @@ public class Bank {
 }
 #endregion
 
-namespace tanais.IntCBRF.Server
+namespace Tanais.IntCBRF.Server
 {
   
   public class ModuleFunctions
@@ -100,10 +100,13 @@ namespace tanais.IntCBRF.Server
     {
       // Создана для переопределения в перекрытиях и записи результатов синхронизации.
       // Запись в стандартный лог.
+      var log = new Structures.Module.Log() {SystemCode = IntCBRF.PublicConstants.Module.SystemCode, EventResult = result, EventMessage = message};
+      var logJson = Newtonsoft.Json.JsonConvert.SerializeObject(log);
+      
       if (result == IntCBRF.PublicConstants.Module.EventResult.Error)
-        Logger.ErrorFormat("SystemCode = {0}, EventResult = {1}, EventMessage = {2}", IntCBRF.PublicConstants.Module.SystemCode, result, message);
+        Logger.Error(logJson);
       else
-        Logger.DebugFormat("SystemCode = {0}, EventResult = {1}, EventMessage = {2}", IntCBRF.PublicConstants.Module.SystemCode, result, message);
+        Logger.Debug(logJson);
       
       // Отправка уведомления администратору или ответственному за интеграцию.
       if (sendNotice)
@@ -118,9 +121,9 @@ namespace tanais.IntCBRF.Server
     public static void SendNotice(string message)
     {
       // Роль ответственного за интеграцию.
-      var role = Sungero.CoreEntities.Roles.GetAll(r => Equals(r.Sid, tanais.IntCBRF.PublicConstants.Module.IntegrationResponsible)).FirstOrDefault();
+      var role = Sungero.CoreEntities.Roles.GetAll(r => Equals(r.Sid, Tanais.IntCBRF.PublicConstants.Module.IntegrationResponsible)).FirstOrDefault();
       var responsibleList = Sungero.CoreEntities.Roles.GetAllUsersInGroup(role).ToList();
-      var subject = tanais.IntCBRF.Resources.SubjectNotice;
+      var subject = Tanais.IntCBRF.Resources.SubjectNotice;
       
       // Если ответственный не определен, то отправляется системному администратору.
       if (responsibleList.Count() == 0)
@@ -154,7 +157,7 @@ namespace tanais.IntCBRF.Server
         // Проверяем на блокировку.
         if (Locks.GetLockInfo(bankRef).IsLocked)
         {
-          var resultText = IntCBRF.Resources.PrefixBanks + tanais.IntCBRF.Resources.BlockedEntityFormat(bankRef.Id);
+          var resultText = IntCBRF.Resources.PrefixBanks + Tanais.IntCBRF.Resources.BlockedEntityFormat(bankRef.Id);
           WriteToExecLog(IntCBRF.PublicConstants.Module.EventResult.Error, resultText, false);
           return IntCBRF.PublicConstants.Module.ProcessResult.Error;
         }
@@ -181,7 +184,7 @@ namespace tanais.IntCBRF.Server
       catch (Exception ex)
       {
         // Запись данных об ошибке в лог.
-        result = tanais.IntCBRF.PublicConstants.Module.ProcessResult.Error;
+        result = Tanais.IntCBRF.PublicConstants.Module.ProcessResult.Error;
         var resultText = IntCBRF.Resources.PrefixBanks + IntCBRF.Resources.ExecuteConnectErrorFormat(ex.Message);
         WriteToExecLog(IntCBRF.PublicConstants.Module.EventResult.Error, resultText, false);
         return result;
@@ -200,15 +203,15 @@ namespace tanais.IntCBRF.Server
       var counter = Structures.Module.CounterProcess.Create();
       
       // Получить xml с сайта ЦБ РФ с информацией по валютам.
-      var xml = GetXMLFromCBR(IntCBRF.Resources.CaseBanks);
+      var banksDataXml = GetXMLFromCBR(IntCBRF.Resources.CaseBanks);
       
-      if (!string.IsNullOrEmpty(xml))
+      if (!string.IsNullOrEmpty(banksDataXml))
       {
         // Дессереализация XML.
         var serializer = new XmlSerializer(typeof(Bank));
         Bank result;
         
-        using (TextReader reader = new StringReader(xml))
+        using (TextReader reader = new StringReader(banksDataXml))
         {
           result = (Bank)serializer.Deserialize(reader);
         }
@@ -241,11 +244,11 @@ namespace tanais.IntCBRF.Server
           }
         }
         
-        // Запись в лог. Уведомление администратору или ответственному только если были ошибки синхронизации.
-        var SendNotice = counter.Error > 0;
+        // Запись в лог. Уведомление администратору или ответственному согласно настройкам.
+        var sendNotice = IsNeedSendNotice(counter);
         
-        var message = IntCBRF.Resources.PrefixBanks + tanais.IntCBRF.Resources.ProcessImportCountFormat(counter.Total, counter.Created, counter.Updated, counter.NotChanged, counter.Error);
-        WriteToExecLog(IntCBRF.PublicConstants.Module.EventResult.Success, message, SendNotice);
+        var message = IntCBRF.Resources.PrefixBanks + Tanais.IntCBRF.Resources.ProcessImportCountFormat(counter.Total, counter.Created, counter.Updated, counter.NotChanged, counter.Error);
+        WriteToExecLog(IntCBRF.PublicConstants.Module.EventResult.Success, message, sendNotice);
         
       }
     }
@@ -278,7 +281,7 @@ namespace tanais.IntCBRF.Server
         // Проверяем на блокировку.
         if (Locks.GetLockInfo(currency).IsLocked)
         {
-          var resultText = IntCBRF.Resources.PrefixBanks + tanais.IntCBRF.Resources.BlockedEntityFormat(currency.Id);
+          var resultText = IntCBRF.Resources.PrefixBanks + Tanais.IntCBRF.Resources.BlockedEntityFormat(currency.Id);
           WriteToExecLog(IntCBRF.PublicConstants.Module.EventResult.Error, resultText, false);
           return IntCBRF.PublicConstants.Module.ProcessResult.Error;
         }
@@ -311,13 +314,25 @@ namespace tanais.IntCBRF.Server
       catch (Exception ex)
       {
         // Запись данных об ошибке в лог.
-        result = tanais.IntCBRF.PublicConstants.Module.ProcessResult.Error;
+        result = Tanais.IntCBRF.PublicConstants.Module.ProcessResult.Error;
         var resultText = IntCBRF.Resources.PrefixCurrencies + IntCBRF.Resources.ExecuteConnectErrorFormat(ex.Message);
         WriteToExecLog(IntCBRF.PublicConstants.Module.EventResult.Error, resultText, false);
         return result;
       }
       
       return result;
+    }
+    
+    public bool IsNeedSendNotice(Tanais.IntCBRF.Structures.Module.CounterProcess counter)
+    {
+      // Настройки для получения данных по отправке уведомления администратору.
+      var CBRFsettings = IntCBRF.CBRFSettingses.GetAll().First();
+      
+      var sendNotice = CBRFsettings.SendNotice == IntCBRF.CBRFSettings.SendNotice.Always || CBRFsettings.SendNotice == IntCBRF.CBRFSettings.SendNotice.Errors && counter.Error > 0;
+      if (CBRFsettings.SendNotice == IntCBRF.CBRFSettings.SendNotice.Never)
+        sendNotice = false;
+      
+      return sendNotice;
     }
     
     /// <summary>
@@ -329,16 +344,17 @@ namespace tanais.IntCBRF.Server
       // Счетчик для результата обработки записи.
       var counter = Structures.Module.CounterProcess.Create();
       
-      // Получить xml с сайта ЦБ РФ с информацией по валютам
-      string xml = GetXMLFromCBR(IntCBRF.Resources.CaseCurrencies);
       
-      if (!string.IsNullOrEmpty(xml))
+      // Получить xml с сайта ЦБ РФ с информацией по валютам
+      string currenciesDataXml = GetXMLFromCBR(IntCBRF.Resources.CaseCurrencies);
+      
+      if (!string.IsNullOrEmpty(currenciesDataXml))
       {
         // Дессереализация XML.
         var serializer = new XmlSerializer(typeof(Currency));
         Currency result;
         
-        using (TextReader reader = new StringReader(xml))
+        using (TextReader reader = new StringReader(currenciesDataXml))
         {
           result = (Currency)serializer.Deserialize(reader);
         }
@@ -371,45 +387,40 @@ namespace tanais.IntCBRF.Server
           }
         }
         
-        // Запись в лог. Уведомление администратору или ответственному только если были ошибки синхронизации.
-        var SendNotice = counter.Error > 0;
+        // Запись в лог. Уведомление администратору или ответственному согласно настройкам.
+        var sendNotice = IsNeedSendNotice(counter);
         
-        var message = IntCBRF.Resources.PrefixCurrencies + tanais.IntCBRF.Resources.ProcessImportCountFormat(counter.Total, counter.Created, counter.Updated, counter.NotChanged, counter.Error);
-        WriteToExecLog(IntCBRF.PublicConstants.Module.EventResult.Success, message, SendNotice);
+        var message = IntCBRF.Resources.PrefixCurrencies + Tanais.IntCBRF.Resources.ProcessImportCountFormat(counter.Total, counter.Created, counter.Updated, counter.NotChanged, counter.Error);
+        WriteToExecLog(IntCBRF.PublicConstants.Module.EventResult.Success, message, sendNotice);
       }
     }
     
     /// <summary>
     /// Получить настройки синхронизации.
     /// </summary>
-    /// <param name="Case">Вариант получения данных.</param>
+    /// <param name="Case">Строка подключения.</param>
     /// <returns>Структура с настройками с префексом для логирования, ссылкой подключения и типом кодировки.</returns>
-    public virtual Structures.Module.Settings GetSettings(string Case)
+    public virtual string GetConnectionSettings(string Case)
     {
-      // Получаение настроек подключения.
-      var settings = Structures.Module.Settings.Create();
-      settings.EncodingStandart = Constants.Module.EncodingStandart;
+      // Настройки для получения ссылок подключчения к сервисам ЦБ РФ.
+      var CBRFsettings = IntCBRF.CBRFSettingses.GetAll().First();
       
       switch (Case)
       {
           // Вариант валют.
           case Constants.Module.CaseCurrencies: {
-            settings.Address = IntCBRF.PublicConstants.Module.AddressCBRCurrencies;
-            settings.CaseLog = IntCBRF.Resources.PrefixCurrencies;
-            break;
+            return CBRFsettings.AddressCBRCurrencies;
           }
           // Вариант Банков.
           case Constants.Module.CaseBanks:  {
-            settings.Address = IntCBRF.PublicConstants.Module.AddressCBRBanks;
-            settings.CaseLog = IntCBRF.Resources.PrefixBanks;
-            break;
+            return CBRFsettings.AddressCBRBanks;
           }
           default: {
             break;
           }
       }
       
-      return settings;
+      return string.Empty;
     }
 
     /// <summary>
@@ -419,16 +430,16 @@ namespace tanais.IntCBRF.Server
     /// <returns>XML с сайта.</returns>
     public string GetXMLFromCBR(string Case)
     {
-      var xml = string.Empty;
+      var incomingDataXml = string.Empty;
       var client = new System.Net.WebClient();
       
       // Получить информацию по банкам/валютам
-      var settings = GetSettings(Case);
+      var connectionString = GetConnectionSettings(Case);
       
       // Получить данные с сайта ЦБ РФ
       try
       {
-        xml = Encoding.GetEncoding(settings.EncodingStandart).GetString(client.DownloadData(settings.Address));
+        incomingDataXml = Encoding.GetEncoding(Constants.Module.EncodingStandart).GetString(client.DownloadData(connectionString));
       }
       catch (Exception ex)
       {
@@ -437,7 +448,7 @@ namespace tanais.IntCBRF.Server
         WriteToExecLog(eventResult, resultText, false);
       }
       
-      return xml;
+      return incomingDataXml;
     }
     
   }

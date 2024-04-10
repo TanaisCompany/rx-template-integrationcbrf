@@ -77,7 +77,7 @@
     <value>ЦБРФ. Ответственный за обработку интеграции</value>
   </data>
   <data name="SubjectNotice" xml:space="preserve">
-    <value>В процессе интеграции с системой ЦБ РФ возникла ошибка</value>
+    <value>Результат процесса интеграции с системой ЦБ РФ</value>
   </data>
   <data name="ProcessImportCount" xml:space="preserve">
     <value>Всего обработано {0} записей
