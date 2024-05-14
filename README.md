@@ -98,7 +98,7 @@ sendNotice - необходимость отправки задачи ответ
       
       if (bankRef == null)
       {
-        // Создание заTanais.писи о банке.
+        // Создание записи о банке.
         bankRef = Sungero.Parties.Banks.Create();  // использовать вместо Sungero.Parties.Banks перекрытый на прикладном уровне справочник Банки
         result = Tanais.IntCBRF.PublicConstants.Module.ProcessResult.Created;
       }
