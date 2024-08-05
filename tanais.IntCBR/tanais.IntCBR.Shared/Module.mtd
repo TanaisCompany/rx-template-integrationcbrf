@@ -22,6 +22,7 @@
       "NameGuid": "3146869e-7707-47eb-9499-db5123ea4b98",
       "BackgroundPosition": "Stretch"
     },
+    "RemoteControls": [],
     "Tabs": []
   },
   "DesktopViews": [],
@@ -29,6 +30,8 @@
   "Importance": "Medium",
   "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "InterfaceNamespace": "Tanais.IntCBR",
+  "IsolatedAssemblyName": "Tanais.IntCBR.Isolated",
+  "IsolatedNamespace": "Tanais.IntCBR.Isolated",
   "OrderedSpecialFolders": [],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
@@ -39,7 +42,7 @@
   "SharedAssemblyName": "Tanais.IntCBR.Shared",
   "SharedNamespace": "Tanais.IntCBR.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.8",
+  "Version": "0.0.2.0",
   "Widgets": [],
   "Versions": [
     {
