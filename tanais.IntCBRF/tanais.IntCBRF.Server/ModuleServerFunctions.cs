@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -7,83 +7,6 @@ using System.Text;
 using System.IO;
 using System.Net;
 using System.Xml.Serialization;
-
-#region Класс получения информации по валютам
-[XmlRoot(ElementName="Item")]
-public class Item {
-
-  [XmlElement(ElementName="Name")]
-  public string Name { get; set; }
-
-  [XmlElement(ElementName="EngName")]
-  public string EngName { get; set; }
-
-  [XmlElement(ElementName="Nominal")]
-  public string Nominal { get; set; }
-
-  [XmlElement(ElementName="ParentCode")]
-  public string ParentCode { get; set; }
-
-  [XmlElement(ElementName="ISO_Num_Code")]
-  public string ISONumCode { get; set; }
-
-  [XmlElement(ElementName="ISO_Char_Code")]
-  public string ISOCharCode { get; set; }
-
-  [XmlAttribute(AttributeName="ID")]
-  public string ID { get; set; }
-
-  [XmlText]
-  public string Text { get; set; }
-}
-
-[XmlRoot(ElementName="Valuta")]
-public class Currency {
-
-  [XmlElement(ElementName="Item")]
-  public List<Item> Items { get; set; }
-
-  [XmlAttribute(AttributeName="name")]
-  public string Name { get; set; }
-
-  [XmlText]
-  public string Text { get; set; }
-}
-#endregion
-
-#region Класс получения информации по банкам
-[XmlRoot(ElementName="Record")]
-public class Record {
-
-  [XmlElement(ElementName="ShortName")]
-  public string ShortName { get; set; }
-
-  [XmlElement(ElementName="Bic")]
-  public string Bic { get; set; }
-
-  [XmlAttribute(AttributeName="ID")]
-  public string ID { get; set; }
-
-  [XmlAttribute(AttributeName="DU")]
-  public string DU { get; set; }
-
-  [XmlText]
-  public string Text { get; set; }
-}
-
-[XmlRoot(ElementName="BicCode")]
-public class Bank {
-
-  [XmlElement(ElementName="Record")]
-  public List<Record> Records { get; set; }
-
-  [XmlAttribute(AttributeName="name")]
-  public string Name { get; set; }
-
-  [XmlText]
-  public string Text { get; set; }
-}
-#endregion
 
 namespace Tanais.IntCBRF.Server
 {
@@ -139,7 +62,7 @@ namespace Tanais.IntCBRF.Server
     /// </summary>
     /// <param name="bank">Данные из запроса к ЦБ РФ о банке.</param>
     /// <returns>Результат выполнения.</returns>
-    public virtual int ProcessBank(Record bank)
+    public virtual int ProcessBank(Structures.Module.Record bank)
     {
       // Проверить наличие банка.
       var bankRef = Sungero.Parties.Banks.GetAll().Where(r => r.BIC == bank.Bic).FirstOrDefault();
@@ -208,12 +131,12 @@ namespace Tanais.IntCBRF.Server
       if (!string.IsNullOrEmpty(banksDataXml))
       {
         // Дессереализация XML.
-        var serializer = new XmlSerializer(typeof(Bank));
-        Bank result;
+        var serializer = new XmlSerializer(typeof(Structures.Module.Bank));
+        Structures.Module.Bank result;
         
         using (TextReader reader = new StringReader(banksDataXml))
         {
-          result = (Bank)serializer.Deserialize(reader);
+          result = (Structures.Module.Bank)serializer.Deserialize(reader);
         }
 
         if (result.Records.Count > 0)
@@ -258,7 +181,7 @@ namespace Tanais.IntCBRF.Server
     /// </summary>
     /// <param name="bank">Данные из запроса к ЦБ РФ о банке.</param>
     /// <returns>Результат выполнения.</returns>
-    public virtual int ProcessCurrency(Item curr)
+    public virtual int ProcessCurrency(Structures.Module.Item curr)
     {
       var numericCode = curr.ISONumCode;
       // Скорректировать номер до 3 знаков
@@ -351,12 +274,12 @@ namespace Tanais.IntCBRF.Server
       if (!string.IsNullOrEmpty(currenciesDataXml))
       {
         // Дессереализация XML.
-        var serializer = new XmlSerializer(typeof(Currency));
-        Currency result;
+        var serializer = new XmlSerializer(typeof(Structures.Module.Currency));
+        Structures.Module.Currency result;
         
         using (TextReader reader = new StringReader(currenciesDataXml))
         {
-          result = (Currency)serializer.Deserialize(reader);
+          result = (Structures.Module.Currency)serializer.Deserialize(reader);
         }
 
         if (result.Items.Count > 0)
