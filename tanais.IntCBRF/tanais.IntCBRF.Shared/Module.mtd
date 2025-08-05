@@ -259,7 +259,7 @@
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 8
+      "Number": 9
     },
     {
       "Type": "DomainApi",
