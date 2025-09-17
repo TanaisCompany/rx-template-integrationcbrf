@@ -6,7 +6,7 @@ using Sungero.CoreEntities;
 
 namespace Tanais.IntCBR.Client
 {
-  public class ModuleFunctions
+  public partial class ModuleFunctions
   {
 
   }
