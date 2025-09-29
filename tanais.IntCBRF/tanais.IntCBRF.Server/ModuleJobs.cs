@@ -9,7 +9,7 @@ using System.IO;
 using System.Text;
 namespace Tanais.IntCBRF.Server
 {
-  public class ModuleJobs
+  public partial class ModuleJobs
   {
 
     /// <summary>

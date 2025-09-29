@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 namespace Tanais.IntCBRF.Server
 {
   
-  public class ModuleFunctions
+  public partial class ModuleFunctions
   {
     /// <summary>
     /// Записать результат интеграции в лог.
