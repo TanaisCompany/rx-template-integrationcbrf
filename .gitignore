@@ -34,3 +34,6 @@ log
 _ConfigSettings.xml
 
 Libraries.json
+
+
+*.g.xml
