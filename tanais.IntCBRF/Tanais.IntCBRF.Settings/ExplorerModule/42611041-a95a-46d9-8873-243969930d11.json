@@ -1,0 +1,9 @@
+{
+  "$type": "Sungero.DataExport.ExportingObject, Sungero.DataExport",
+  "SortingPriority": "Medium",
+  "HelpCode": "Tanais_IntCBRF",
+  "Uuid": "42611041-a95a-46d9-8873-243969930d11",
+  "ModuleNameGuid": "42611041-a95a-46d9-8873-243969930d11",
+  "StoreAsDefaultSetting": true,
+  "Status": "Active"
+}
