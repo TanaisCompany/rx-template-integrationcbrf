@@ -71,7 +71,7 @@
       ]
     }
   ],
-  "FormViewUuid": "7934b575-3eff-474e-aea1-daad0cc8c98d",
+  "FormViewUuid": "5a1933b8-b79f-49aa-93d4-a6d3e0eebd9d",
   "HandledEvents": [
     "BeforeSaveServer"
   ],

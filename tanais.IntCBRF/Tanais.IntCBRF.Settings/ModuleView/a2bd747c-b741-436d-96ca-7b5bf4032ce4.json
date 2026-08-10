@@ -2,7 +2,7 @@
   "$type": "Sungero.DataExport.ExportingObject, Sungero.DataExport",
   "Cover": {
     "$type": "Sungero.NoCode.Settings.Interfaces.Models.Cover.CoverSettings, Sungero.NoCode.Settings.Interfaces",
-    "NameGuid": "0920f6e6-5b11-4313-9a59-86cf181bad3f",
+    "NameGuid": "79908706-5ece-494d-9399-e29a415bad68",
     "Header": {
       "$type": "Sungero.NoCode.Settings.Interfaces.Models.Cover.CoverHeaderSettings, Sungero.NoCode.Settings.Interfaces",
       "NameGuid": "b73d6be3-fdc3-4390-9922-269295d903b0",
@@ -88,7 +88,7 @@
         "Number": 1,
         "ItemType": "EntityType",
         "NameGuid": "589fd71d-3a04-4def-a58b-51a526779903",
-        "Uuid": "619df994-cf36-4b29-93cd-2bea62efa883"
+        "Uuid": "9e80bbb6-8117-4658-8f74-fea90ecda669"
       }
     ]
   },
@@ -107,7 +107,7 @@
           "TypeGuid": "5e9b55c2-c1f5-4e4f-aa09-7b6d461d87ed",
           "Identifier": "ba88ed21-a43c-4684-be90-99c5a22e5c90"
         },
-        "Uuid": "4859f81d-5a26-4fe3-bba1-c1d7406bfb34"
+        "Uuid": "f83f1824-80b6-441d-9b14-694d25c90c8a"
       }
     ]
   },
